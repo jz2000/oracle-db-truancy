@@ -1,0 +1,20 @@
+<window title="My First ZK Application" border="normal">
+   Hello World!
+   <borderlayout vflex="min" apply="demo.getting_started.layout.LayoutController">
+        <north sclass="header" height="50px">
+            <label sclass="header-text">Connection parameters</label>
+        </north> 
+        <west title="Connections" collapsible="true" width="360px" vflex="1">
+                Connecton list
+        </west>
+         <center sclass="nested-center">
+                center
+         </center> 
+         <south sclass="footer" height="50px">
+            <vbox align="center" pack="center" width="100%" sclass="footer-box">
+                <label sclass="footer_text">Copyright � 2013</label>
+                <label sclass="footer_text">Sergey Zheznyakovskiy</label>
+            </vbox>
+        </south>
+   </borderlayout>
+</window>
