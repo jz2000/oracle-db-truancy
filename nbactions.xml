@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>run</actionName>
+            <goals>
+                <goal>clean</goal>
+                <goal>package</goal>
+                <goal>jetty:run</goal>
+            </goals>
+            <properties>
+                <exec.args>-classpath %classpath ${packageClassName}</exec.args>
+                <exec.executable>java</exec.executable>
+            </properties>
+        </action>
+        <action>
+            <actionName>build</actionName>
+            <goals>
+                <goal>clean</goal>
+                <goal>package</goal>
+                <goal>jetty:run</goal>
+            </goals>
+        </action>
+    </actions>

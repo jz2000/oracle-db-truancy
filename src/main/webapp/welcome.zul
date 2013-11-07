@@ -1,5 +1,5 @@
 <!--<window title="OracleDB Truancy" border="normal">-->
-   <borderlayout vflex="max" apply="org.jz.truancy.oradb.WelcomeController">
+   <borderlayout vflex="max" apply="org.jz.truancy.oradb.controllers.WelcomeController">
         <north title="Connection parameters" splittable="false" collapsible="true">
         </north> 
         <west title="Connections" collapsible="true" splittable="true" width="360px" vflex="1">
@@ -25,22 +25,22 @@
 <rows>
                 <row>
                     <label value="DB Alias" width="150px" />
-                            <label id="modelLabel" />
+                            <label id="aliasLabel" />
                 </row>
                 <row>
                     <label value="DB URL" width="150px" />
-                            <label id="makeLabel" />
+                            <label id="urlLabel" />
                 </row>
                 <row>
                     <label value="UserName" width="150px" />
                     <hlayout>
-                        <textbox value="@bind(fx.userName)"
+                        <textbox id="userNameTextBox"
                             width="150px" tabindex="1" />
                     </hlayout>
                 </row>
                 <row>
                     Password
-                    <textbox type="password" value="@bind(fx.password)"
+                    <textbox id="passwordTextBox" type="password"
                         width="150px" tabindex="2" />
                 </row>
                 <row>
@@ -48,18 +48,13 @@
                         <vlayout>
                             <label visible="@load(empty vmsgs)"
                                 value="@load(empty vmsgs ? 'Form successfully submitted!' : '', before='submit')" />
-                            <button label="Connect" onClick="@command('submit')"
-                                width="100px" height="30px" />
+                            <button id="loginButton" label="Connect" 
+                                width="100px" height="30px" autodisable="self"/>
                         </vlayout>
                 </row>
 </rows>
             </grid>
         </groupbox>
-                    <image id="previewImage" width="250px" />
-                    <vbox>
-                            <label id="priceLabel" />
-                            <label id="descriptionLabel" />
-                    </vbox>
             </vbox>
         </center> 
         <south vflex="min">

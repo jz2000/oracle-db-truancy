@@ -2,7 +2,7 @@ package tutorial;
 
 
 import org.jz.truancy.oradb.ConnectionServiceImpl;
-import org.jz.truancy.oradb.Connection;
+import org.jz.truancy.oradb.DbConnection;
 import org.jz.truancy.oradb.ConnectionService;
 import java.util.List;
 
@@ -36,17 +36,15 @@ public class SearchController extends SelectorComposer<Component> {
 	@Listen("onClick = #searchButton")
 	public void search(){
 		String keyword = keywordBox.getValue();
-		List<Connection> result = carService.search(keyword);
-		carListbox.setModel(new ListModelList<Connection>(result));
+		List<DbConnection> result = carService.search(keyword);
+		carListbox.setModel(new ListModelList<DbConnection>(result));
 	}
 	
 	@Listen("onSelect = #carListbox")
 	public void showDetail(){
-		Connection selected = carListbox.getSelectedItem().getValue();
-		previewImage.setSrc(selected.getPreview());
+		DbConnection selected = carListbox.getSelectedItem().getValue();
 		modelLabel.setValue(selected.getAlias());
 		makeLabel.setValue(selected.getUrl());
-		priceLabel.setValue(selected.getPrice().toString());
 		descriptionLabel.setValue(selected.getDescription());
 	}
 }

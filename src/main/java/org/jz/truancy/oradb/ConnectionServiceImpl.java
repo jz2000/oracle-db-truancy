@@ -6,12 +6,12 @@ import java.util.List;
 public class ConnectionServiceImpl implements ConnectionService{
 
 	//data model
-	private List<Connection> connectionList = new LinkedList<>();
+	private List<DbConnection> connectionList = new LinkedList<>();
 	private static int id = 1;
 	//initialize book data
 	public ConnectionServiceImpl() {
 		connectionList.add(
-				new Connection(id++, 
+				new DbConnection(id++, 
 						"dev-regi-db",
 						"jdbc:orache:thin:@()",
 						"The Nissan Primera was produced between 2002 and 2008. It was available as a 4-door sedan or a 5-door hatchback or estate."+
@@ -19,21 +19,21 @@ public class ConnectionServiceImpl implements ConnectionService{
 						"img/car1.png",
 						23320));
 		connectionList.add(
-				new Connection(id++, 
+				new DbConnection(id++, 
 						"dev-sartre-6",
 						"jdbc:orache:thin:@()",
 						"The Nissan Cefiro is an intermediate-size automobile range sold in Japan and other countries. It was available only as a 4 door sedan. A large proportion were equipped with automatic transmissions. Originally marketed towards the Japanese salaryman the top model used the same engine as found in the R32 Nissan Skyline, a 2 litre turbo charged 6 cylinder engine capable of just over 200 hp (150 kW). Other variants came with other versions of the Nissan RB engine. Brand new, the Cefiro was slightly more expensive than the equivalent Nissan Skyline.",
 						"img/car2.png",
 						38165));
 		connectionList.add(
-				new Connection(id++, 
+				new DbConnection(id++, 
 						"dev-sartre-7",
 						"jdbc:orache:thin:@()",
 						"The Toyota Camry is a midsize car manufactured by Toyota in Georgetown, Kentucky, USA; as well as Australia; and Japan. Since 2001 it has been the top selling car in the United States.The Holden equivalents were not successful even though they came from the same factory as the Camry. Since 2000 Daihatsu has sold a Camry twin named the Daihatsu Altis. The name comes from the English phonetic of the Japanese word \"kan-muri,\" which means \"crown.\"",
 						"img/car3.png",
 						24170));
 		connectionList.add(
-				new Connection(id++, 
+				new DbConnection(id++, 
 						"stg-regi-db-circ",
 						"jdbc:orache:thin:@()",
 						"The Toyota Century is a large four-door limousine produced by Toyota mainly for the Japanese market. Production of the Century began in 1967 and the model received " +
@@ -42,21 +42,21 @@ public class ConnectionServiceImpl implements ConnectionService{
 						"img/car4.png",
 						28730));
 		connectionList.add(
-				new Connection(id++, 
+				new DbConnection(id++, 
 						"stg-regi-db-mainline",
 						"jdbc:orache:thin:@()",
 						"The third-generation of Japanese car Mitsubishi Galant, dating from 1976, was divided into two models: the Galant Sigma (for the sedan and wagon) and the Galant Lambda (the coupe). The former was sold in many markets as the Mitsubishi Galant (without the word 'Sigma') and in Australia as the Chrysler Sigma (until 1980, after which it became the Mitsubishi Sigma). Strangely, in New Zealand it was badged as 'Galant Sigma' but colloquially referred to as the 'Sigma', a name it formally adopted after 1980.",
 						"img/car5.png",
 						54120));
 		connectionList.add(
-				new Connection(id++, 
+				new DbConnection(id++, 
 						"stg-sartre-2-circ",
 						"jdbc:orache:thin:@()",
 						"The Mitsubishi Challenger, called Mitsubishi Pajero Sport in most export markets, Mitsubishi Montero Sport in Spanish-speaking countries (including North America), Mitsubishi Shogun Sport in the UK and Mitsubishi Nativa in Central and South Americas (the Challenger name was also used in Australia), is a medium sized SUV built by the Mitsubishi Motors Corporation. It was released in 1997, and is still built as of 2006, although it's no longer available in its native Japan since the end of 2003.",
 						"img/car6.png",
 						58750));
 		connectionList.add(
-				new Connection(id++, 
+				new DbConnection(id++, 
 						"stg-sartre-2-mainline",
 						"jdbc:orache:thin:@()",
 						"The eighth generation Honda Civic is produced since 2006. It is available as a coupe, hatchback and sedan. Models produced for the North American market have a different styling."+
@@ -64,7 +64,7 @@ public class ConnectionServiceImpl implements ConnectionService{
 						"img/car1.png",
 						17479));
 		connectionList.add(
-				new Connection(id++, 
+				new DbConnection(id++, 
 						"prod-regi-db",
 						"jdbc:orache:thin:@()",
 						" The Volkswagen Beetle is produced since 1998. It is available as a coupe or convertible."+
@@ -73,7 +73,7 @@ public class ConnectionServiceImpl implements ConnectionService{
 						"img/car2.png",
 						67540));
 		connectionList.add(
-				new Connection(id++, 
+				new DbConnection(id++, 
 						"prod-sartre",
 						"jdbc:orache:thin:@()",
 						"The Volkswagen Golf V is produced since 2003. There is a wide range of fine and reliable engines. The best choice would be 1.6-liter FSI direct injection petrol with 115 hp or 2.0-liter turbodiesel with 150 hp. The last mentioned features an outstanding fuel economy for it's capacity and acceleration speed, although is a bit noisy. The strongest performer is a 2.0-liter GTI, delivering 200 hp, which continues the Golf's hot hatch traditions."+
@@ -81,7 +81,7 @@ public class ConnectionServiceImpl implements ConnectionService{
 						"img/car3.png",
 						78200));
 		connectionList.add(
-				new Connection(id++, 
+				new DbConnection(id++, 
 						"dev-siebel",
 						"jdbc:orache:thin:@()",
 						" This car is sold as the Dodge Neon in the United States and as Chrysler Neon for export only. It is a second generation Neon produced since 2000."+
@@ -91,17 +91,17 @@ public class ConnectionServiceImpl implements ConnectionService{
 	}
 	
         @Override
-	public List<Connection> findAll(){
+	public List<DbConnection> findAll(){
 		return connectionList;
 	}
 	
         @Override
-	public List<Connection> search(String keyword){
-		List<Connection> result = new LinkedList<>();
+	public List<DbConnection> search(String keyword){
+		List<DbConnection> result = new LinkedList<>();
 		if (keyword==null || "".equals(keyword)){
 			result = connectionList;
 		}else{
-			for (Connection c: connectionList){
+			for (DbConnection c: connectionList){
 				if (c.getAlias().toLowerCase().contains(keyword.toLowerCase())
 					||c.getUrl().toLowerCase().contains(keyword.toLowerCase())){
 					result.add(c);

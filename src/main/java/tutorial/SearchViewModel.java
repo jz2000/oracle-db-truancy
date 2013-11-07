@@ -1,7 +1,7 @@
 package tutorial;
 
 import org.jz.truancy.oradb.ConnectionServiceImpl;
-import org.jz.truancy.oradb.Connection;
+import org.jz.truancy.oradb.DbConnection;
 import org.jz.truancy.oradb.ConnectionService;
 import java.util.List;
 import org.zkoss.bind.annotation.*;
@@ -9,8 +9,8 @@ import org.zkoss.bind.annotation.*;
 public class SearchViewModel {
 	
 	private String keyword;
-	private List<Connection> carList;
-	private Connection selectedCar;
+	private List<DbConnection> carList;
+	private DbConnection selectedCar;
 	
 	private ConnectionService carService = new ConnectionServiceImpl();
 	
@@ -21,15 +21,15 @@ public class SearchViewModel {
 		return keyword;
 	}
 
-	public List<Connection> getCarList(){
+	public List<DbConnection> getCarList(){
 		return carList;
 	}
 	
 		
-	public void setSelectedCar(Connection selectedCar) {
+	public void setSelectedCar(DbConnection selectedCar) {
 		this.selectedCar = selectedCar;
 	}
-	public Connection getSelectedCar() {
+	public DbConnection getSelectedCar() {
 		return selectedCar;
 	}
 

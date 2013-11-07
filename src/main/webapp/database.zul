@@ -1,0 +1,45 @@
+<!--<window title="OracleDB Truancy" border="normal">-->
+   <borderlayout vflex="max" apply="org.jz.truancy.oradb.controllers.DatabaseController">
+        <north title="Database" splittable="false" collapsible="true">
+        </north> 
+        <west title="Object Types" collapsible="true" splittable="true" width="360px" vflex="1">
+            <vbox>
+            <hbox align="center">
+                    Search:
+                    <textbox id="searchTextBox" />
+                    <button id="searchObjectTypeButton" label="Search" image="/img/search.png" />
+            </hbox>
+            <listbox id="objectTypeListBox" height="100%" emptyMessage="No object types found in the result">
+                    <template name="model">
+                            <listitem>
+                                    <listcell label="${each.typeLabel}"/>
+                                    <listcell><button label="list"/></listcell>
+                            </listitem>
+                    </template>
+            </listbox>
+            </vbox>    
+        </west>
+        <center title="Object list" sclass="nested-center">
+            <vbox style="margin-top:20px">
+
+            <label id="selectedObjectTypeTitle"/>
+            <listbox id="selectedObjectTypeItemsListBox" height="100%" emptyMessage="No objects found in the result">
+                    <template name="model">
+                            <listitem>
+                                    <listcell label="${each.name}"/>
+                                    <listcell label="${each.comment}"/>
+                                    <listcell><button label="open"/></listcell>
+                            </listitem>
+                    </template>
+            </listbox>
+            </vbox>
+        </center> 
+        <south vflex="min">
+            <vbox align="center" pack="center" width="100%">
+                <label>Copyright © 2013</label>
+                <label>Sergey Zheznyakovskiy</label>
+            </vbox>
+        </south>
+   </borderlayout>
+
+<!--</window>-->
