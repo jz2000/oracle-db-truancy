@@ -9,11 +9,12 @@
                     <textbox id="searchTextBox" />
                     <button id="searchObjectTypeButton" label="Search" image="/img/search.png" />
             </hbox>
+            <button label="open" id="openObjectTypeButton"/>
             <listbox id="objectTypeListBox" height="100%" emptyMessage="No object types found in the result">
                     <template name="model">
                             <listitem>
                                     <listcell label="${each.typeLabel}"/>
-                                    <listcell><button label="list"/></listcell>
+                                    <listcell></listcell>
                             </listitem>
                     </template>
             </listbox>
@@ -21,14 +22,19 @@
         </west>
         <center title="Object list" sclass="nested-center">
             <vbox style="margin-top:20px">
-
             <label id="selectedObjectTypeTitle"/>
+            <hbox align="center">
+                    Search:
+                    <textbox id="searchObjectTextBox" />
+                    <button id="searchObjectButton" label="Search" image="/img/search.png" />
+            </hbox>
+            <button label="open" id="openObjectButton"/>
             <listbox id="selectedObjectTypeItemsListBox" height="100%" emptyMessage="No objects found in the result">
                     <template name="model">
                             <listitem>
                                     <listcell label="${each.name}"/>
                                     <listcell label="${each.comment}"/>
-                                    <listcell><button label="open"/></listcell>
+                                    <listcell></listcell>
                             </listitem>
                     </template>
             </listbox>

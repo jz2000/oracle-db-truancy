@@ -1,0 +1,41 @@
+<!--<window title="OracleDB Truancy" border="normal">-->
+   <borderlayout vflex="max" apply="org.jz.truancy.oradb.controllers.TableController">
+        <north title="Database" splittable="false" collapsible="true">
+        </north> 
+        <west title="Tabs" collapsible="true" splittable="true" width="360px" vflex="1">
+            <vbox>
+            <listbox id="tabsListBox" height="100%">
+                <listitem>
+                        <listcell>Definition</listcell>
+                        <listcell>Columns</listcell>
+                        <listcell>Keys</listcell>
+                        <listcell>Indexes</listcell>
+                        <listcell>Constraints</listcell>
+                        <listcell>Data</listcell>
+                </listitem>
+            </listbox>
+            </vbox>    
+        </west>
+        <center title="Table" sclass="nested-center">
+            <vbox style="margin-top:20px">
+            <listbox id="columnsListBox" height="100%" emptyMessage="No columns found in the result">
+                    <template name="model">
+                            <listitem>
+                                    <listcell label="${each.name}"/>
+                                    <listcell label="${each.comment}"/>
+                                    <listcell label="${each.type}"/>
+                                    <listcell label="${each.size}"/>
+                            </listitem>
+                    </template>
+            </listbox>
+            </vbox>
+        </center> 
+        <south vflex="min">
+            <vbox align="center" pack="center" width="100%">
+                <label>Copyright © 2013</label>
+                <label>Sergey Zheznyakovskiy</label>
+            </vbox>
+        </south>
+   </borderlayout>
+
+<!--</window>-->

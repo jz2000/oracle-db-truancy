@@ -6,6 +6,7 @@ package org.jz.truancy.oradb;
  */
 public class DbObject
 {
+    public String type;
     public String name;
     public String comment;
 
@@ -27,5 +28,15 @@ public class DbObject
     public void setComment(String comment)
     {
         this.comment = comment;
+    }
+
+    public String getType()
+    {
+        return type;
+    }
+
+    public void setType(String type)
+    {
+        this.type = type;
     }
 }

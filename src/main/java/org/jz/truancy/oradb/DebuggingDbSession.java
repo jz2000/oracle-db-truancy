@@ -15,7 +15,7 @@ public class DebuggingDbSession implements DbSession
     private final String userName;
     private final String password;
     
-    private final Map<String, List<DbObject>> objectsMap = new HashMap<>();
+    private final List<DbObject> objects = new ArrayList<>();
     
     public DebuggingDbSession(
             String alias, 
@@ -42,41 +42,36 @@ public class DebuggingDbSession implements DbSession
     }
 
     {
-        putDbObject("TABLE", makeDbObject("EMPLOYEE", "Employee"));
-        putDbObject("TABLE", makeDbObject("DEPT", "Department"));
-        putDbObject("TABLE", makeDbObject("MANAGER", "Manager"));
-        putDbObject("TABLE", makeDbObject("SALARY", "Salary"));
-        putDbObject("TABLE", makeDbObject("CONTRACT", "Contract"));
-        putDbObject("VIEW", makeDbObject("EMPLOYEE_TO_MANAGER_LIST", "Employee to Manager"));
-        putDbObject("VIEW", makeDbObject("EMPLOYEE_TO_DEPT_LIST", "Employee to Department"));
-        putDbObject("VIEW", makeDbObject("MANAGER_TO_DEPT", "Manager to department"));
-        putDbObject("VIEW", makeDbObject("SALARY_TO_DEPT_LIST", "Salary to department"));
-        putDbObject("SEQUENCE", makeDbObject("CONTRACT_ID", "Contract id generator"));
-        putDbObject("PACKAGE", makeDbObject("EMPLOYEE_OPERATIONS", "Employee operations"));
-        putDbObject("PACKAGE", makeDbObject("DEPT_OPERATIONS", "Department operations"));
-        putDbObject("PACKAGE_BODY", makeDbObject("EMPLOYEE_OPERATIONS", "Employee operations"));
-        putDbObject("PACKAGE_BODY", makeDbObject("DEPT_OPERATIONS", "Department operations"));
-        putDbObject("PROCEDURE", makeDbObject("CONTRACT_REVERT", "Contract revertation"));
+        putDbObject(makeDbObject("TABLE", "EMPLOYEE", "Employee"));
+        putDbObject(makeDbObject("TABLE", "DEPT", "Department"));
+        putDbObject(makeDbObject("TABLE", "MANAGER", "Manager"));
+        putDbObject(makeDbObject("TABLE", "SALARY", "Salary"));
+        putDbObject(makeDbObject("TABLE", "CONTRACT", "Contract"));
+        putDbObject(makeDbObject("VIEW", "EMPLOYEE_TO_MANAGER_LIST", "Employee to Manager"));
+        putDbObject(makeDbObject("VIEW", "EMPLOYEE_TO_DEPT_LIST", "Employee to Department"));
+        putDbObject(makeDbObject("VIEW", "MANAGER_TO_DEPT", "Manager to department"));
+        putDbObject(makeDbObject("VIEW", "SALARY_TO_DEPT_LIST", "Salary to department"));
+        putDbObject(makeDbObject("SEQUENCE", "CONTRACT_ID", "Contract id generator"));
+        putDbObject(makeDbObject("PACKAGE", "EMPLOYEE_OPERATIONS", "Employee operations"));
+        putDbObject(makeDbObject("PACKAGE", "DEPT_OPERATIONS", "Department operations"));
+        putDbObject(makeDbObject("PACKAGE_BODY", "EMPLOYEE_OPERATIONS", "Employee operations"));
+        putDbObject(makeDbObject("PACKAGE_BODY", "DEPT_OPERATIONS", "Department operations"));
+        putDbObject(makeDbObject("PROCEDURE", "CONTRACT_REVERT", "Contract revertation"));
      }
     
     public void putDbObject(
-            String objectType,
             DbObject object)
     {
-        List<DbObject> objectList = objectsMap.get(objectType);
-        if (objectList == null) 
-        {
-            objectList = new ArrayList<>();
-            objectsMap.put(objectType, objectList);
-        }
-        objectList.add(object);
+        objects.add(object);
     }
     
     public static DbObject makeDbObject(
+            String type,
             String name,
             String comment)
     {
         DbObject result = new DbObject();
+        result.setType(type);
         result.setName(name);
         result.setComment(comment);
         return result;
@@ -86,15 +81,42 @@ public class DebuggingDbSession implements DbSession
     public List<DbObject> getObjectsForType(
             String typeName) throws Exception
     {
-        List<DbObject> objects = objectsMap.get(typeName);
-        if (objects == null) 
+        List<DbObject> result = new ArrayList<>();
+        for (DbObject object : objects)
         {
-            return new ArrayList<>();
-        } 
-        else 
-        {
-            return objects;
+            if (typeName.equals("%"))
+            {
+                result.add(object);
+            }
+            else if (object.getType().equals(typeName))
+            {
+                result.add(object);
+            }
         }
+        return result;
+    }
+
+    @Override
+    public List<DbObject> searchObjects(
+            String typeName, 
+            String keyword) throws Exception
+    {
+        List<DbObject> result = new ArrayList<>();
+        for (DbObject object : objects)
+        {
+            if (keyword.isEmpty() || object.getName().contains(keyword) || object.getComment().contains(keyword))
+            {
+                if (typeName.equals("%"))
+                {
+                    result.add(object);
+                }
+                else if (object.getType().equals(typeName))
+                {
+                    result.add(object);
+                }
+            }
+        }
+        return result;
     }
     
 }
