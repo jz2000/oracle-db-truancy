@@ -3,6 +3,8 @@ package org.jz.truancy.oradb;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.dbcp.BasicDataSource;
 /**
@@ -43,14 +45,59 @@ public class OracleDbSession implements DbSession
     }
 
     @Override
-    public List<DbObject> getObjectsForType(String typeName)
+    public List<DbObject> getObjectsForType(String typeName) throws SQLException
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String QUERY = "select * from ALL_TABLES";
+        List<DbObject> result = new ArrayList<>();
+        try (Connection connection = dataSource.getConnection()) 
+        {
+            try (CallableStatement stmt = connection.prepareCall(QUERY)) 
+            {
+                try (ResultSet rs = stmt.executeQuery())
+                {
+                    while (rs.next()) 
+                    {
+                        DbObject object = new DbObject();
+                        object.setType("TABLE");
+                        object.setName(rs.getString("owner"));
+                        object.setComment("Just read");
+                        result.add(object);
+                    }
+                }
+            }
+        }
+        return result;
     }
 
     @Override
     public List<DbObject> searchObjects(String typeName, String keyword) throws Exception
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (keyword == null || keyword.isEmpty()) 
+        {
+            return getObjectsForType(typeName);
+        }
+        else 
+        {
+            String QUERY = "select * from ALL_TABLES";
+            List<DbObject> result = new ArrayList<>();
+            try (Connection connection = dataSource.getConnection()) 
+            {
+                try (CallableStatement stmt = connection.prepareCall(QUERY)) 
+                {
+                    try (ResultSet rs = stmt.executeQuery())
+                    {
+                        while (rs.next()) 
+                        {
+                            DbObject object = new DbObject();
+                            object.setType("TABLE");
+                            object.setName(rs.getString("owner"));
+                            object.setComment("Just read");
+                            result.add(object);
+                        }
+                    }
+                }
+            }
+            return result;
+        }
     }
 }
