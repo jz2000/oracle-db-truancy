@@ -13,7 +13,7 @@ public class ConnectionServiceImpl implements ConnectionService{
 		connectionList.add(
 				new DbConnection(id++, 
 						"dev-regi-db",
-						"jdbc:orache:thin:@()",
+						"jdbc:oracle:thin:@//rac02-vip.qprvt.nytimes.com:1526/R2DV",
 						"The Nissan Primera was produced between 2002 and 2008. It was available as a 4-door sedan or a 5-door hatchback or estate."+
 						" The entry-level 1.6-liter petrol feels underpowered for a large car. The 1.8-liter petrol is keen, the refined 2.0-liter unit is the star performer. An improved 2.2-liter turbodiesel performs well, but is only relatively economical, as it's competitors in this class with similar characteristics offer even lower fuel consumption.",
 						"img/car1.png",
