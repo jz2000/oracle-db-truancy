@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Document   : db-connect
+    Created on : 21-Nov-2013, 01:32:31
+    Author     : jz
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+
+    <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+
+    <!-- any content can be specified here, e.g.: -->
+    <jsp:element name="text">
+        <jsp:attribute name="lang">EN</jsp:attribute>
+        <jsp:body>
+            <h1>Database Connect</h1>
+            
+            <form action="dbconnect" method="post">
+                <input type="hidden" id="dbalias" name="dbalias" value="dev-regi-db"/>  
+                <table>
+                    <tr><td><input type="text" id="username" name="username" value="username"/></td></tr>
+                    <tr><td><input type="password" id="password" name="password" value="password"/></td></tr>
+                    <tr><td><button type="submit" value="Connect" name="submit" id="submit" title="Connect">Connect</button></td></tr>
+                    <tr><td><button type="reset" value="Reset" id="reset" name="reset">Reset</button></td></tr>
+                </table>
+            </form>
+        </jsp:body>
+    </jsp:element>
+
+</jsp:root>
